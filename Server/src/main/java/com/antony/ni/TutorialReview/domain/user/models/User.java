@@ -1,16 +1,13 @@
 package com.antony.ni.TutorialReview.domain.user.models;
 
 import com.antony.ni.TutorialReview.domain.common.BaseEntity;
+import com.antony.ni.TutorialReview.domain.post.models.Post;
 import com.antony.ni.TutorialReview.domain.review.models.Review;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,12 +16,30 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Slf4j
+@Table(name="Users")
 public class User extends BaseEntity {
 
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
-    private Set<Review> Reviews;
+    private Set<Post> posts;
+
+    @NonNull
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private Set<Review> reviews;
+
+    @NonNull
+    private String username;
+
+    @NonNull
+    private String email;
+
+    @NonNull
+    private String password;
+
+
+
 
 
 
